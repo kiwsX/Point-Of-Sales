@@ -47,7 +47,15 @@
                             <div class="card mb-3">
                                 <div class="card-body">
                                     <?php 
-                                        if (isset($_GET['error'])) { ?>
+                                        if (isset($_GET['error']) && $_GET['error'] == 'Password tidak sesuai') { ?>
+                                            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                                <strong><?php echo $_GET['error']; ?></strong>
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                            </div>
+                                        <?php
+                                        }
+
+                                        if (isset($_GET['error']) && $_GET['error'] == 'Akun tidak ditemukan') { ?>
                                             <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                                 <strong><?php echo $_GET['error']; ?></strong>
                                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>

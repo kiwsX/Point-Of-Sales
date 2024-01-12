@@ -1,3 +1,9 @@
+<?php
+
+  require('../../config/session.php');
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
