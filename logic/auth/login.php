@@ -20,7 +20,7 @@ if (isset($_POST['submit'])) {
             $_SESSION['username'] = $data['username'];
             $_SESSION['name'] = $data['name'];
             
-            header("location: ../../pages/dashboard/index.php");
+            header("location: ../../index.php");
         } else {
             echo "<script>alert('Password tidak sesuai')</script>";
             header("location: ../../pages/auth/login.php?error=Password tidak sesuai");

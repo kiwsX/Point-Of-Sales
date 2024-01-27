@@ -1,19 +1,18 @@
 <?php
+  include('functions/view-query.php');
 
-include('../layouts/header.php');
-include('../layouts/navbar.php');
-include('../layouts/sidebar.php');
+  $data = getCategory();
 
 ?>
 
 <main id="main" class="main">
 
     <div class="pagetitle">
-        <h1>Data Kategori</h1>
+        <h1>Kategori</h1>
         <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-            <li class="breadcrumb-item active">Data Kategori</li>
+            <li class="breadcrumb-item active">Kategori</li>
         </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -24,10 +23,51 @@ include('../layouts/sidebar.php');
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Data Kategori</h5>
+              <?php
+                if(isset($_GET['alert']) && $_GET['alert'] == 'berhasil') { ?>
+                  <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                    <h4 class="alert-heading">Berhasil!</h4>
+                    <p>Data berhasil ditambahkan.</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                <?php }
+
+                if(isset($_GET['alert']) && $_GET['alert'] == 'berhasil update') { ?>
+                  <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                    <h4 class="alert-heading">Berhasil!</h4>
+                    <p>Data berhasil diupdate.</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                <?php }
+
+                if(isset($_GET['alert']) && $_GET['alert'] == 'gagal hapus') { ?>
+                  <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                    <h4 class="alert-heading">Gagal!</h4>
+                    <p>Data gagal dihapus.</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                <?php }
+
+                if(isset($_GET['alert']) && $_GET['alert'] == 'berhasil hapus') { ?>
+                  <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                    <h4 class="alert-heading">Berhasil!</h4>
+                    <p>Data berhasil dihapus.</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                <?php }
+              ?>
+              <h5 class="card-title">Kategori</h5>
+
+              <div class="text-end mb-3">
+                <a href="index.php?page=kategori/create">
+                  <button type="button" class="btn btn-primary">
+                    Tambah
+                  </button>
+                </a>
+              </div>
 
               <!-- Table with stripped rows -->
-              <table class="table datatable">
+              <table id="table-kategori">
                 <thead>
                   <tr>
                     <th>No.</th>
@@ -37,15 +77,27 @@ include('../layouts/sidebar.php');
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>KAT-001</td>
-                    <td>Kategori 1</td>
-                    <td>
-                      <a href="#" class="btn btn-primary">Edit</a>
-                      <a href="#" class="btn btn-danger">Delete</a>
-                    </td>
-                  </tr>
+                  <?php
+                    foreach ($data as $key => $value) { ?>
+                      <tr>
+                        <td><?= $key + 1 ?></td>
+                        <td><?= $value['kode_kategori'] ?></td>
+                        <td><?= $value['nama_kategori'] ?></td>
+                        <td>
+                          <a href="index.php?page=kategori/edit&id=<?= $value['id'] ?>">
+                            <button type="button" class="btn btn-success">
+                              Edit
+                            </button>
+                          </a>
+                          <a href="logic/kategori/delete.php?id=<?= $value['id'] ?>" onclick="javascript:return confirm('Hapus Data Kategori ?');">
+                            <button type="button" class="btn btn-danger">
+                              Hapus
+                            </button>
+                          </a>
+                        </td>
+                      </tr>
+                    <?php }
+                  ?>
                 </tbody>
               </table>
               <!-- End Table with stripped rows -->
@@ -59,4 +111,8 @@ include('../layouts/sidebar.php');
 
 </main><!-- End #main -->
 
-<?php include('../layouts/footer.php'); ?>
+<script>
+  $(document).ready(function() {
+    $('#table-kategori').DataTable();
+  })
+</script>

@@ -1,12 +1,3 @@
-<?php
-
-include('../layouts/header.php');
-include('../layouts/navbar.php');
-include('../layouts/sidebar.php');
-include('../../config/database.php');
-
-?>
-
 <main id="main" class="main">
 
     <div class="pagetitle">
@@ -20,5 +11,3 @@ include('../../config/database.php');
     </div><!-- End Page Title -->
 
 </main><!-- End #main -->
-
-<?php include('../layouts/footer.php'); ?>

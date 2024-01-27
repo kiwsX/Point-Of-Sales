@@ -3,7 +3,7 @@
 
 <div class="d-flex align-items-center justify-content-between">
   <a href="index.html" class="logo d-flex align-items-center">
-    <img src="../../assets/img/logo.png" alt="">
+    <img src="assets/img/logo.png" alt="">
     <span class="d-none d-lg-block">Point Of Sales</span>
   </a>
   <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -16,7 +16,7 @@
 
       <a class="nav-link text-dark" href="#" data-bs-toggle="dropdown">
         <span class="me-2 text-sm"><?= $_SESSION['name'] ?></span>
-        <img src="../../assets/img/user.jpg" alt="Profile" class="rounded-circle" style="width: 33px">
+        <img src="assets/img/user.jpg" alt="Profile" class="rounded-circle" style="width: 33px">
         <span class="right ms-2 dropdown-toggle"></span>
       </a><!-- End Profile Iamge Icon -->
 
@@ -29,7 +29,7 @@
         </li>
 
         <li>
-          <a class="dropdown-item d-flex align-items-center" href="../../logic/auth/logout.php">
+          <a class="dropdown-item d-flex align-items-center" href="logic/auth/logout.php">
             <i class="bi bi-box-arrow-right"></i>
             <span>Sign Out</span>
           </a>
