@@ -16,7 +16,19 @@
     $ext = pathinfo($filename, PATHINFO_EXTENSION);
 
     if(!in_array($ext,$ekstensi) ) {
-        header("location: ../../index.php?page=barang/edit&id=$id&alert=gagal_ekstensi");
+        $data = [
+            'kode_barang' => $kode_barang,
+            'nama_barang' => $nama_barang,
+            'kode_kategori' => $kode_kategori,
+            'harga' => $harga,
+            'stok' => $stok
+        ];
+        if(updateBarang($data, $id, false)) {
+            header("location: ../../index.php?page=barang&alert=berhasil_update");
+        } else {
+            header("location: ../../index.php?page=barang/edit&id=$id&alert=gagal");
+        }
+        // header("location: ../../index.php?page=barang/edit&id=$id&alert=gagal_ekstensi");
     } else {
         if($ukuran < 1044070) {
             $xx = $rand.'_'.$filename;
@@ -30,7 +42,7 @@
             ];
             move_uploaded_file($_FILES['image']['tmp_name'], '../../public/img/product/'.$xx);
 
-            if(updateBarang($data, $id)) {
+            if(updateBarang($data, $id, true)) {
                 header("location: ../../index.php?page=barang&alert=berhasil_update");
             } else {
                 header("location: ../../index.php?page=barang/edit&id=$id&alert=gagal");

@@ -70,7 +70,7 @@
         }
     }
 
-    function updateBarang($data, $id)
+    function updateBarang($data, $id, $isFile = false)
     {
         $conn = connection();
 
@@ -81,7 +81,11 @@
         $stok = $data['stok'];
         $image = $data['image'];
 
-        $query = "UPDATE m_barang SET kode_kategori = '$kodeKategori', kode_barang = '$kodeBarang', nama_barang = '$namaBarang', harga = '$harga', stok = '$stok', images = '$image' WHERE id = '$id'";
+        if ($isFile) {
+            $query = "UPDATE m_barang SET kode_kategori = '$kodeKategori', kode_barang = '$kodeBarang', nama_barang = '$namaBarang', harga = '$harga', stok = '$stok', images = '$image' WHERE id = '$id'";
+        } else {
+            $query = "UPDATE m_barang SET kode_kategori = '$kodeKategori', kode_barang = '$kodeBarang', nama_barang = '$namaBarang', harga = '$harga', stok = '$stok' WHERE id = '$id'";
+        }
         $result = mysqli_query($conn, $query);
 
         if ($result) {
@@ -96,9 +100,11 @@
         $conn = connection();
 
         $query = "DELETE FROM m_barang WHERE id = '$id'";
+        $file = mysqli_query($conn, "SELECT images FROM m_barang WHERE id = '$id'")->fetch_assoc()['images'];
+        $deleteFile = unlink('../../public/img/product/'.$file);
         $result = mysqli_query($conn, $query);
 
-        if ($result) {
+        if ($result && $deleteFile) {
             return true;
         } else {
             return false;
